@@ -1,17 +1,8 @@
----
-title: "RNA velocity"
-author: "Our group"
-date: "19 December 2019"
-output: html_document
----
+# Downloading raw data, STAR indexing and alignment
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+## 2.1 Downloading data from SRA
 
-## Downloading data from SRA
-
-We chose 100 good cells and saved the indices as FINAL_SET_TEST, which we transferred to the taito-shell. 
+We chose 100 good cells and saved the indices as FINAL_SET_TEST, which we transferred to the Taito cluster (Jakke Neiro's account). 
 
 ```{bash, eval=FALSE}
 scp FINAL_SET_TEST neiroja1@taito-shell.csc.fi:/wrk/neiroja1/human_genome/FINAL_SET_TEST
@@ -21,7 +12,7 @@ mkdir human_genome
 cd human_genome
 ```
 
-We downloaded the compiled sra-tookit
+We downloaded the compiled sra-toolkit (2.10.0) and used it to download the sequence files from the SRA (Sequence read archive). In order to use the sra-toolkit, the compatible version perl was activated by loading the cluster's biokit.   
 
 ```{bash, eval=FALSE}
 wget http://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/2.10.0/sratoolkit.2.10.0-ubuntu64.tar.gz
@@ -29,10 +20,11 @@ tar -zxvf sratoolkit.2.10.0-ubuntu64.tar.gz
 mv sratoolkit.2.10.0-ubuntu64 sratoolkit
 mkdir FINAL_SRA
 cd FINAL_SRA
+module load biokit
 while read p; do ../SRA/sratoolkit/bin/fastq-dump --split-files $p; done < ../FINAL_TEST_SET
 ```
 
-## Building the index
+## 2.2 Building the index
 
 We donwloaded the human genome and the corresponding annotation file
 
@@ -86,3 +78,23 @@ The file was executed
 sbatch star_align_final
 ```
 
+## 2.3 Alignment to the genome
+Thhe reads were aligned to the genome with STAR (version 2.2.1), which was pre-installed on the cluster. The alignment was performed as long-running screen process as no SLURM quota was left at this point. 
+
+First a connction to taito.csc.fi was opened, and then a screen job was initiated
+
+```{bash, eval=TRUE}
+screen -R
+```
+
+In the screen session, a taito-shell session was launched
+
+```{bash, eval=TRUE}
+sinteractive
+```
+
+Then the STAR alignment was initiated using 5 threads
+
+```{bash, eval=TRUE}
+while read p; do STAR --genomeDir GENOME_Indices_final --readFilesIn FINAL_SRA/"$p"_1.fastq FINAL_SRA/"$p"_2.fastq --outFileNamePrefix FINAL_align/star_final_$p --outSAMtype BAM SortedByCoordinate --runThreadN 5; done < FINAL_TEST_SET 
+```
