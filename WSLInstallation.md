@@ -4,7 +4,7 @@
 
 velocyto.R (velox + κύτος, quick cell) is a package for the analysis of expression dynamics in single cell RNA seq data. In particular, it enables estimations of RNA velocities of single cells by distinguishing unspliced and spliced mRNAs in standard single-cell RNA sequencing protocols. For more details on this R package see <http://velocyto.org/> or <https://github.com/velocyto-team/velocyto.R>.
 
-## prerequisite One - linux kernel 
+## 1.1 Prerequisite One - linux kernel 
 
 velocyto.R requires unix-flavoured operating system with good storage capacities to enable processing large RNA sequencing data. However, DTC computers do not have enough storage capacities (10GB or more is recommened). In addition, their general computing performance is only moderate. One convenient solution is to install linux kernel on a Windows device with better specifications. Note, everything that follows in this markdown was done with a lenovo s740-14iil laptop (intel i7-1065G7, 16 GB DDR4 RAM, 1 TB SSD).
 
@@ -30,7 +30,7 @@ wsl -l -v
 
 Source: <https://docs.microsoft.com/en-us/windows/wsl/wsl2-install> 
 
-## prerequisite Two - R base
+## 1.2 Prerequisite Two - R base
 - Launch Ubuntu 18.04 terminal to get started 
 - Install the packages necessary to add a new repository over HTTPS
 ```{bash, eval = FALSE}
@@ -53,7 +53,7 @@ R --version
 
 Source: <https://linuxize.com/post/how-to-install-r-on-ubuntu-18-04/>
 
-## prerequisite Three - RStudio Server
+## 1.3 Prerequisite Three - RStudio Server
 
 RStudio Server provides a browser based interface to a version of R running on a remote Linux server.
 
@@ -80,7 +80,7 @@ hostname -I
 
 Source: <https://rstudio.com/products/rstudio/download-server/debian-ubuntu/>
 
-## prerequisite Four - devtools
+## 1.4 Prerequisite Four - devtools
 The devtools package is useful for installing R packages directly from GitHub. Later on, velocyto.R will be downloaded in this way.
 
 - install system dependencies for devtools
@@ -95,7 +95,7 @@ install.packages('devtools')
 
 Source: <https://www.digitalocean.com/community/tutorials/how-to-install-r-packages-using-devtools-on-ubuntu-18-04#conclusion>
 
-## prerequisite Five - system dependencies for velocyto.R  
+## 1.5 Prerequisite Five - system dependencies for velocyto.R  
 - Run update command to update package repositories and get latest package information
 ```{bash, eval = FALSE}
 sudo apt-get update -y
@@ -112,7 +112,7 @@ Sources:
 - openmp library <http://manueldeveloper.blogspot.com/2012/04/how-to-install-openmp-in-ubuntu-linux.html>
 - libhdf5-dev package <https://zoomadmin.com/HowToInstall/UbuntuPackage/libhdf5-dev>
 
-## prerequisite Six - pcaMethods R package
+## 1.6 Prerequisite Six - pcaMethods R package
 This dependency comes from the Bioconductor. It is not in CRAN depository so it has to be installed manually.
 - Launch R in the Ubuntu terminal
 - install BiocManager package which helps to install and manage packages from the Bioconductor 
@@ -127,7 +127,7 @@ BiocManager::install("pcaMethods")
 
 Source <http://www.bioconductor.org/packages/release/bioc/html/pcaMethods.html>
 
-## install the velocyto.R package
+## 1.7 Install the velocyto.R package
 - Launch R in the Ubuntu terminal
 - install the velocyto.R package using devtools
 ```{r, eval = FALSE}
