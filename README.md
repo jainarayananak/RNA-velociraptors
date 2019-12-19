@@ -9,6 +9,10 @@ Bioinformatics Hackathon
 
 20th December 2019
 
+# Summary
+Glioblastoma is a devastating central nervous system tumour arising from glial cells that causes the death of about 250,000 people each year. In our Hackathon project, we aimed to investigate whether RNA velocity can be used to understand the differences between tumour layers in glioblastoma and help us identify the origin of tumour cells. Furthermore, we aimed to see whether RNA velocity could be used to predict tumour migration and to identify relevant molecular markers for the progression of the disease. Our presentation of the project can be found [here](RNAVelocity_Hackathon.pptx).
+
+
 ## 1. Installing WSL on Windows 10
 Before even starting, we we were posed with a computational problem: the PCs provided by the Doctoral Training Centre (DTC) did not have storage capacities required for storing downloaded RNAseq data and perform computationally heavy tasks. Therefore, we downloaded the Windows Subsystem for Linux (WSL) on our own personal laptops to be able to perform our project. The documentation for how we set up our data science environment can be seen [here](WSLInstallation.md)
 
