@@ -52,5 +52,5 @@ sinteractive
 Then the velocyto CLI tool was launched
 
 ```{bash, eval=TRUE}
-while read p; do STAR --genomeDir GENOME_Indices_final --readFilesIn FINAL_SRA/"$p"_1.fastq FINAL_SRA/"$p"_2.fastq --outFileNamePrefix FINAL_align/star_final_$p --outSAMtype BAM SortedByCoordinate --runThreadN 5; done < FINAL_TEST_SET 
+velocyto run-smartseq2 -o OUTPUT -e FINAL100cells $WRKDIR/human_genome/FINAL_align/*.bam $WRKDIR/human_genome/Homo_sapiens.GRCh38.98.gtf
 ```
