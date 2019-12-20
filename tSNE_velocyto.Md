@@ -38,23 +38,23 @@ colnames(ldat$spanning) <- colnames(ldat$spliced)
 
 Set up expression matrices.
 ```{r}
-## 4.5 Exonic read (spliced) expression matrix
+## Exonic read (spliced) expression matrix
 emat <- ldat$spliced
 
-## 4.6 Normalise
+## Normalise
 emat <- emat[,colSums(emat)>=1e3]
 
-## 4.7 Remove dupliate row names (genes)
+## Remove dupliate row names (genes)
 emat <- emat[!duplicated(rownames(emat)),]
 
-## 4.8 Filter out all non-neoplastic cells
+## Filter out all non-neoplastic cells
 all_types <- tibble(Run = colnames(ldat$spliced))
 Neoplastic_info <- inner_join(SraRunInfoTableNeo, all_types, by="Run")
 emat <- emat[, Neoplastic_info$Run]
 
 ```
 
-## 4.9 Reduction of dimension analysis
+## 4.5 Reduction of dimension analysis
 Create pagoda2 objects and adjust variances.
 ```{r}
 r <- Pagoda2$new(emat,modelType='plain',trim=10,log.scale=T)
